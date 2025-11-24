@@ -10,7 +10,7 @@ import (
 	"gorm.io/gorm"
 )
 
-var Connection *gorm.DB
+var connection *gorm.DB
 
 func init() {
 	dbPath := filepath.Join(os.Getenv("PWD"), "test.db")
@@ -25,5 +25,10 @@ func init() {
 	sqlDB.SetMaxIdleConns(10)
 	sqlDB.SetMaxOpenConns(100)
 	sqlDB.SetConnMaxLifetime(time.Hour)
-	Connection = db
+	connection = db
+}
+
+// Connection returns the shared *gorm.DB (read‑only from other packages).
+func Connection() *gorm.DB {
+	return connection
 }

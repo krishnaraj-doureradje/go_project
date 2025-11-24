@@ -16,7 +16,7 @@ func main() {
 	docs.SwaggerInfo.Description = "This is application to create and get user details from sqlite."
 	docs.SwaggerInfo.Version = "1.0"
 	// Optional: Auto migrate the User model
-	if err := db.Connection.AutoMigrate(&models.User{}); err != nil {
+	if err := db.Connection().AutoMigrate(&models.User{}); err != nil {
 		// handle error appropriately, e.g., log or return
 		logger.Log.Error().Msgf("AutoMigrate failed: %v", err)
 	}

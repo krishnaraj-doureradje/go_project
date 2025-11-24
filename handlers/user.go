@@ -20,7 +20,7 @@ import (
 // @Router /users [get]
 func GetUsers(c *gin.Context) {
 	var users []models.User
-	if err := db.Connection.Find(&users).Error; err != nil {
+	if err := db.Connection().Find(&users).Error; err != nil {
 		logger.Log.Error().Err(err).Msg("Failed to fetch users")
 		c.JSON(http.StatusInternalServerError, models.ErrorResponse{
 			Code:    "Undefined",
@@ -59,7 +59,7 @@ func AddUser(c *gin.Context) {
 		Email: input.Email,
 	}
 
-	if err := db.Connection.Create(&user).Error; err != nil {
+	if err := db.Connection().Create(&user).Error; err != nil {
 		logger.Log.Error().Err(err).Msg("Failed to add user")
 		c.JSON(http.StatusInternalServerError, models.ErrorResponse{
 			Code:    "Undefined",
