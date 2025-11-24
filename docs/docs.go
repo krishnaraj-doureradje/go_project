@@ -34,14 +34,14 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/models.User"
+                                "$ref": "#/definitions/user.User"
                             }
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/models.ErrorResponse"
+                            "$ref": "#/definitions/server.ErrorResponse"
                         }
                     }
                 }
@@ -65,7 +65,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.CreateUserInput"
+                            "$ref": "#/definitions/user.CreateUserInput"
                         }
                     }
                 ],
@@ -73,19 +73,19 @@ const docTemplate = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/models.User"
+                            "$ref": "#/definitions/user.User"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/models.ErrorResponse"
+                            "$ref": "#/definitions/server.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/models.ErrorResponse"
+                            "$ref": "#/definitions/server.ErrorResponse"
                         }
                     }
                 }
@@ -93,7 +93,26 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "models.CreateUserInput": {
+        "server.ErrorResponse": {
+            "type": "object",
+            "required": [
+                "code",
+                "message"
+            ],
+            "properties": {
+                "code": {
+                    "description": "Code is a predefined error code string, e.g. \"0001\".",
+                    "type": "string",
+                    "example": "0000"
+                },
+                "message": {
+                    "description": "Message should clearly describe the error in human-readable form.",
+                    "type": "string",
+                    "example": "The error in human-readable form"
+                }
+            }
+        },
+        "user.CreateUserInput": {
             "type": "object",
             "required": [
                 "email",
@@ -113,30 +132,10 @@ const docTemplate = `{
                 }
             }
         },
-        "models.ErrorResponse": {
-            "type": "object",
-            "required": [
-                "code",
-                "message"
-            ],
-            "properties": {
-                "code": {
-                    "description": "Code is a predefined error code string, e.g. \"0001\".",
-                    "type": "string",
-                    "example": "0000"
-                },
-                "message": {
-                    "description": "Message should clearly describe the error in human-readable form.",
-                    "type": "string",
-                    "example": "The error in human-readable form"
-                }
-            }
-        },
-        "models.User": {
+        "user.User": {
             "type": "object",
             "required": [
                 "email",
-                "id",
                 "name"
             ],
             "properties": {

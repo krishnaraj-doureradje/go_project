@@ -2,14 +2,14 @@
 # Generate Swagger Files
 
 ```bash
-$ cd cmd/
-$ swag init -g ./main.go -d ../cmd,../handlers,../models,../routes -o ../docs
+# From project root directory
+$ swag init -g ./cmd/app/main.go -o ./docs
 
 ```
 
 ## Run application 
 ```bash
-$  go build cmd/main.go
+$  go build cmd/app/main.go
 $ ./main
 
 ```
@@ -17,6 +17,8 @@ $ ./main
 ## Linter and auto fix
 ```bash
 $ golangci-lint run --fix
+$ go fmt ./...
+$ go vet ./...
 ```
 
 ---
